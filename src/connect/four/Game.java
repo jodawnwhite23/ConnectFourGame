@@ -2,6 +2,7 @@
 package connect.four;
 
 import connect.four.player.Player;
+import connect.four.player.PlayerQuitException;
 import connect.four.board.ReadableBoard;
 import connect.four.board.ReadWritableBoard;
 import java.util.ArrayList;
@@ -93,7 +94,12 @@ public class Game implements ScoreChart {
 		return m_board.getMoveCount();
 	    }
         };
-        m_players[player].performPlay(controlledBoard);
+        try{
+        	m_players[player].performPlay(controlledBoard);
+        } catch (PlayerQuitException ex){
+        	System.out.println(m_players[player].getName()+" quit. Exiting now.");
+        	throw new IllegalStateException("game ending");
+        }
     }
     
     public Player getCurrentPlayer(){

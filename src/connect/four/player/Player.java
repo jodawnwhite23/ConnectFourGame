@@ -5,5 +5,5 @@ import connect.four.board.ReadWritableBoard;
 
 public interface Player {
     String getName();
-    void performPlay(ReadWritableBoard board);
+    void performPlay(ReadWritableBoard board) throws PlayerQuitException;
 }

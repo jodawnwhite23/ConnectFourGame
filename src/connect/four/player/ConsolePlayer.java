@@ -30,7 +30,7 @@ public class ConsolePlayer implements Player, ScoreChart.Listener {
         System.out.println(m_name + ": " + scores.getScore(this));
     }
 
-    @Override public void performPlay(ReadWritableBoard board) {
+    @Override public void performPlay(ReadWritableBoard board) throws PlayerQuitException{
         int width = board.getWidth();
         int height = board.getHeight();
 
@@ -42,7 +42,10 @@ public class ConsolePlayer implements Player, ScoreChart.Listener {
         while (x < 1 || x > width) {
             try {
                 System.out.print("Enter the column you want to play in: ");
-                x = Integer.parseInt(stdin.readLine());
+                String input = stdin.readLine();
+                if (input.equals("quit"))
+                	throw new PlayerQuitException();
+                x = Integer.parseInt(input);
             } catch (IOException e) {
                 // loop again.
             } catch (NumberFormatException e) {
