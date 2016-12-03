@@ -23,7 +23,7 @@ public class ComputerPlayer implements Player {
 
     @Override public void performPlay(ReadWritableBoard board) {
         int l = board.getWidth();
-	int m = board.getHeight();
+        int m = board.getHeight();
         if (board.getMoveCount() == 0) {
             board.play((new Random()).nextInt(l), this);
         } else {
