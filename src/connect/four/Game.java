@@ -67,12 +67,14 @@ public class Game implements ScoreChart {
                         l.gameOver(win, Game.this, m_board);
                     }
                     m_board.clear();
+                    playAgainPrompt();//code modified by Group 22
                     performPlay(player);
 		} else if (m_board.getMoveCount() == m_board.getWidth()*m_board.getHeight() ) {
                     for (ScoreChart.Listener l : m_listeners) {
                         l.gameOver(null, Game.this, m_board);
                     }
                     m_board.clear();
+                    playAgainPrompt();//code modified by Group 22
                     performPlay((player+1) % m_players.length);
                 } else {
                     performPlay((player+1) % m_players.length);
@@ -185,4 +187,30 @@ public class Game implements ScoreChart {
 	}
         return null;
     }
+}
+
+/**
+ * Prompt the player(s) and ask them if they
+ * want to play again. Modification added 11-29-2016
+ */
+private void playAgainPrompt(){
+	System.out.println();
+    System.out.println("Would you like to play again?");
+    System.out.println("(Enter 0 for quit and 1 for play again)");
+    BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+    int x = -1;
+    while (x < 0 || x > 1) {
+        try {
+            System.out.print("Enter your selection: ");
+            x = Integer.parseInt(stdin.readLine());
+        } catch (IOException e) {
+            // loop again.
+        } catch (NumberFormatException e) {
+            // loop again.
+        }
+    }
+    if(x == 0)
+        System.exit(0);
+    else
+    	System.out.println("Playing again!");
 }
